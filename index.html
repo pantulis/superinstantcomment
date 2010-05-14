@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>SuperinstantComment!</title>
+	
+	<script type="text/javascript" 
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js">
+	</script> 
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			//code.which == 48 ('0') 
+			$(document).keydown(function(code) {
+				if (code.which >= 48 && code.which <= 57) {
+					value = code.which - 48; 
+					selector = "#audio" + value
+					console.log("selector = ", selector)
+					if ($(selector)[0]) {
+						$(selector)[0].load()
+						$(selector)[0].play();
+					}
+				}
+			});
+	 });
+	</script> 
+</head>
+
+<body id="index" onload="">
+	
+	<h1 id="superinstantcomment">SuperInstantComment</h1>
+	Hola, eres <strong>{{ nickname}}</strong>.  <a href="{{ logout_url }}">Logout</a>
+	<hr/>
+
+	<ul>
+	{% for c in comments %}
+		<li>
+			<a href="#" onclick="
+			       $('#audio{{forloop.counter}}')[0].load(); 
+			       $('#audio{{forloop.counter}}')[0].play()">
+				<strong>{{ c.name }}</strong>
+			</a>
+			<audio id="audio{{forloop.counter}}" src="/get?cid={{c.key}}"></audio>
+		</li>
+	{% endfor %}
+	</ul>
+	<hr/>
+	<form action="/upload" method="post" enctype='multipart/form-data' >
+		<p><label for="name">Nombre (obligatorio)</label><input type="text" name="name"></p>
+		<p><label for="audiofile">Archivo (mp3)</label><input type="file" name="audiofile"></p>
+		<p><input type="submit" value="P'arriba!! &rarr;"></p>
+	</form>
+		
+</body>
