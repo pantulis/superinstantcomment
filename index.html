@@ -32,22 +32,50 @@
 	<hr/>
 
 	<ul>
-	{% for c in comments %}
+	<li>
+	
+	<h2>Comments globales</h2>
+	<ul>
+	{% for c in global_comments %}
 		<li>
-			<a href="#" onclick="
-			       $('#audio{{forloop.counter}}')[0].load(); 
-			       $('#audio{{forloop.counter}}')[0].play()">
+			<a href="#" onclick="$('#global{{forloop.counter}}')[0].play();			 
+			$('#global{{forloop.counter}}')[0].load(); ">
 				<strong>{{ c.name }}</strong>
 			</a>
-			<audio id="audio{{forloop.counter}}" src="/get?cid={{c.key}}"></audio>
+			<audio id="global{{forloop.counter}}" preload="true" src="/get?cid={{c.key}}"></audio>
 		</li>
 	{% endfor %}
 	</ul>
+
+	</li>
+	<li>
+	<h2>Tus propios comments (usa tecla numérica)</h2>
+	<ol>
+	{% for c in my_comments %}
+		<li>
+			<a href="#" onclick="
+			       $('#audio{{forloop.counter}}')[0].play(); 
+			       $('#audio{{forloop.counter}}')[0].load()">
+				<strong>{{ c.name }}</strong>
+			</a>
+			<audio id="audio{{forloop.counter}}" preload="true" src="/get?cid={{c.key}}"></audio>
+			{% if is_admin %}
+				{% if c.is_global %}
+				<small>&radic;</small>
+				{% endif %}
+			{% endif %}
+		</li>
+	{% endfor %}
+	</ol>
+	
 	<hr/>
 	<form action="/upload" method="post" enctype='multipart/form-data' >
 		<p><label for="name">Nombre (obligatorio)</label><input type="text" name="name"></p>
 		<p><label for="audiofile">Archivo (mp3)</label><input type="file" name="audiofile"></p>
+		{% if is_admin %}
+		<p><label for="is_global">Global</label><input type="checkbox" name="is_global"></p>
+		{% endif %}
 		<p><input type="submit" value="P'arriba!! &rarr;"></p>
 	</form>
-		
+	</li>	
 </body>
