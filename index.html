@@ -38,7 +38,7 @@
 	<ul>
 	{% for c in global_comments %}
 		<li>
-			<a href="#" onclick="$('#global{{forloop.counter}}')[0].play();$('#global{{forloop.counter}}')[0].load(); ">
+			<a href="#" onclick="$('#global{{forloop.counter}}')[0].load();$('#global{{forloop.counter}}')[0].play(); ">
 				<strong>{{ c.name }}</strong>
 			</a>
 			<audio id="global{{forloop.counter}}" autobuffer="true" src="/get?cid={{c.key}}"></audio>
@@ -53,7 +53,9 @@
 	{% for c in my_comments %}
 		<li>
 			<a href="#" onclick="
-			       $('#audio{{forloop.counter}}')[0].play(); ">
+			       $('#audio{{forloop.counter}}')[0].play(); 
+				   $('#audio{{forloop.counter}}))[0].load();
+				">
 				<strong>{{ c.name }}</strong>
 			</a>
 			<audio id="audio{{forloop.counter}}" autobuffer="true"
