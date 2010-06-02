@@ -6,6 +6,10 @@ var SIC = {
 				value = code.which - 48; 
 				selector = "#audio" + value;
 				SIC.play_media($(selector));
+			} else if (code.which >= 111 && code.which <= 121) {
+				value = code.which - 111;
+				selector = "#global" + value;
+				SIC.play_media($(selector));
 			};
 		})
 	},

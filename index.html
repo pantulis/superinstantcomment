@@ -17,11 +17,11 @@
 	<ul>
 	<li id="content">
 	
-	<h2>Comments globales</h2>
+	<h2>Comments globales (teclas de función)</h2>
 	<ul>
 	{% for c in global_comments %}
 		<li>
-			<a href="#" class="click2play"><strong>{{ c.name }}</strong></a>
+			F{{forloop.counter}} - <a href="#" class="click2play"><strong>{{ c.name }}</strong></a>
 			<audio id="global{{forloop.counter}}" autobuffer="true" src="/get?cid={{c.key}}"></audio>
 		</li>
 	{% endfor %}
