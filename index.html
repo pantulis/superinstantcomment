@@ -4,25 +4,8 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<title>SuperinstantComment!</title>
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js">
-	</script> 
-	
-	<script> 
-		$(document).ready(function() {
-			//code.which == 48 ('0') 
-			$(document).keydown(function(code) {
-				if (code.which >= 48 && code.which <= 57) {
-					value = code.which - 48; 
-					selector = "#audio" + value
-					console.log("selector = ", selector)
-					if ($(selector)[0]) {
-						$(selector)[0].load()
-						$(selector)[0].play();
-					}
-				}
-			});
-	 });
-	</script> 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script> 
+	<script src="/javascripts/superinstantcomment.js"></script>
 </head>
 
 <body id="index" onload="">
@@ -38,9 +21,7 @@
 	<ul>
 	{% for c in global_comments %}
 		<li>
-			<a href="#" onclick="$('#global{{forloop.counter}}')[0].load();$('#global{{forloop.counter}}')[0].play(); ">
-				<strong>{{ c.name }}</strong>
-			</a>
+			<a href="#" class="click2play"><strong>{{ c.name }}</strong></a>
 			<audio id="global{{forloop.counter}}" autobuffer="true" src="/get?cid={{c.key}}"></audio>
 		</li>
 	{% endfor %}
@@ -52,14 +33,8 @@
 	<ol>
 	{% for c in my_comments %}
 		<li>
-			<a href="#" onclick="
-			       $('#audio{{forloop.counter}}')[0].play(); 
-				   $('#audio{{forloop.counter}}))[0].load();
-				">
-				<strong>{{ c.name }}</strong>
-			</a>
-			<audio id="audio{{forloop.counter}}" autobuffer="true"
-				src="/get?cid={{c.key}}" type="audio/mp3">
+			<a href="#" class="click2play"><strong>{{ c.name }}</strong></a>
+			<audio id="audio{{forloop.counter}}" autobuffer="true" src="/get?cid={{c.key}}" type="audio/mp3">
 			</audio>
 			{% if is_admin %}
 				{% if c.is_global %}

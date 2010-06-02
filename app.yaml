@@ -4,6 +4,9 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /javascripts
+  static_dir: javascripts
 - url: /.*
   script: superinstantcomment.py
   login: required
+  
